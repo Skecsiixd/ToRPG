@@ -5,6 +5,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ThemedText from "../components/ThemedText";
 import { Colors } from "../constants/Colors";
 import Spacer from "../components/Spacer";
+import { withOpacity } from "../components/AddOpacity";
+import PowerBox from "../components/PowerBox";
 
 const Home = () => {
   const colorScheme = useColorScheme();
@@ -36,100 +38,39 @@ const Home = () => {
         style={[
           styles.textbox,
           {
-            borderColor: theme.borderMedium,
-            backgroundColor: theme.border,
+            borderColor: withOpacity(Colors.purple[800], 0.9),
+            backgroundColor: withOpacity(Colors.purple[800], 0.5),
             marginHorizontal: 10,
             marginTop: 10,
           },
         ]}
       >
-        <Text style={styles.text}>Knight - Level 6</Text>
+        <Text style={[styles.text]}>Knight - Level 6</Text>
       </View>
 
       <Spacer height={50} />
       <View style={styles.rowContainer}>
-        <View
-          style={[
-            styles.box,
-            {
-              borderColor: theme.borderMedium,
-              backgroundColor: theme.border,
-              marginHorizontal: 2,
-              marginTop: 10,
-            },
-          ]}
-        >
-          <MaterialCommunityIcons
-            name="lightning-bolt-outline"
-            size={30}
-            color="orange"
-          />
-          <ThemedText title={true} style={{ fontWeight: "bold", fontSize: 20 }}>
-            10
-          </ThemedText>
-          <ThemedText title={false}>Power</ThemedText>
-        </View>
-        <View
-          style={[
-            styles.box,
-            {
-              borderColor: theme.borderMedium,
-              backgroundColor: theme.border,
-              marginHorizontal: 2,
-              marginTop: 10,
-            },
-          ]}
-        >
-          <MaterialCommunityIcons name="brain" size={30} color="pink" />
-          <ThemedText title={true} style={{ fontWeight: "bold", fontSize: 20 }}>
-            20
-          </ThemedText>
-          <ThemedText title={false}>Mind</ThemedText>
-        </View>
-        <View
-          style={[
-            styles.box,
-            {
-              borderColor: theme.borderMedium,
-              backgroundColor: theme.border,
-              marginHorizontal: 2,
-              marginTop: 10,
-            },
-          ]}
-        >
-          <MaterialCommunityIcons name="fire" size={30} color="cyan" />
-          <ThemedText title={true} style={{ fontWeight: "bold", fontSize: 20 }}>
-            12
-          </ThemedText>
-          <ThemedText title={false}>Dexterity</ThemedText>
-        </View>
+        <PowerBox
+          icon="lightning-bolt-outline"
+          iconColor={Colors.stat.strength.base}
+          text="10"
+          attribute="Strength"
+        />
+        <PowerBox
+          icon="brain"
+          iconColor={Colors.stat.intellect.base}
+          text="13"
+          attribute="Intellect"
+        />
+        <PowerBox
+          icon="fire"
+          iconColor={Colors.stat.endurance.base}
+          text="8"
+          attribute="Endurance"
+        />
       </View>
 
-      <Spacer height={30} />
-
-      <View
-        style={[
-          styles.streakbox,
-          {
-            borderColor: "#ff6a00d5",
-            backgroundColor: "#ff6a007f",
-            marginHorizontal: 10,
-            marginTop: 10,
-          },
-        ]}
-      >
-        <View style={styles.rowContainer}>
-          <MaterialCommunityIcons
-            name="fire"
-            size={50}
-            color="orange"
-            style={{ alignSelf: "flex-start" }}
-          />
-        </View>
-        <ThemedText title={true} style={{ fontWeight: "bold", fontSize: 16 }}>
-          Active Quest
-        </ThemedText>
-      </View>
+      <Spacer height={10} />
     </ThemedView>
   );
 };
@@ -169,8 +110,8 @@ const styles = StyleSheet.create({
     gap: 5, // Modern React Native-ban ez automatikusan tökéletes távolságot tesz a dobozok közé!
   },
   box: {
-    height: 110, // Belső távolság bal és jobb oldalt
-    width: 110, // Belső távolság fent és lent
+    height: 115, // Belső távolság bal és jobb oldalt
+    width: 115, // Belső távolság fent és lent
     alignSelf: "center",
     backgroundColor: "#000000", // A nice blue
     borderRadius: 20, // This rounds the corners!
