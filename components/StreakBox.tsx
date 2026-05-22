@@ -1,18 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import ThemedText from "./ThemedText";
-import { withOpacity } from "./AddOpacity";
+import React from "react";
+import { StyleSheet, View, ViewProps } from "react-native";
 import { Colors } from "../constants/Colors";
+import { withOpacity } from "./AddOpacity";
+import ThemedText from "./ThemedText";
 
 interface StreakBoxProps {
   TitleText: string;
   SubText: string;
 }
 
-const StreakBox = ({ TitleText, SubText }: StreakBoxProps) => {
+const StreakBox = ({
+  TitleText,
+  SubText,
+  ...props
+}: StreakBoxProps & ViewProps) => {
   return (
     <View
+      {...props}
       style={[
         styles.streakbox,
         {
@@ -21,6 +26,7 @@ const StreakBox = ({ TitleText, SubText }: StreakBoxProps) => {
           marginHorizontal: 10,
           marginTop: 10,
         },
+        props.style,
       ]}
     >
       <View style={styles.rowContainer}>

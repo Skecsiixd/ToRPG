@@ -9,7 +9,7 @@ import { ViewProps } from "react-native";
 
 interface PowerBoxProps {
   icon: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
-  iconColor: React.ComponentProps<typeof MaterialCommunityIcons>["color"];
+  iconColor: string;
   text: string;
   attribute: string;
 }
@@ -50,8 +50,8 @@ export default PowerBox;
 
 const styles = StyleSheet.create({
   box: {
-    height: 115, // Belső távolság bal és jobb oldalt
-    width: 115, // Belső távolság fent és lent
+    height: 105, // Belső távolság bal és jobb oldalt
+    width: 105, // Belső távolság fent és lent
     alignSelf: "center",
     backgroundColor: "#000000", // A nice blue
     borderRadius: 20, // This rounds the corners!

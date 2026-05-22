@@ -1,9 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Tabs } from "expo-router";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Colors } from "../constants/Colors";
+import { Tabs } from "expo-router";
+import React from "react";
 import { useColorScheme } from "react-native";
+import { Colors } from "../constants/Colors";
 const RootLayout = () => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? "light"];
@@ -61,4 +60,4 @@ const RootLayout = () => {
 
 export default RootLayout;
 
-const styles = StyleSheet.create({});
+//const styles = StyleSheet.create({});
