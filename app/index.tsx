@@ -10,6 +10,7 @@ import ThemedText from "../components/ThemedText";
 import ThemedView from "../components/ThemedView";
 import XpBar from "../components/XpBar";
 import { Colors } from "../constants/Colors";
+import { useXp } from "../context/XpContext";
 
 const Home = () => {
   const quests = [
@@ -42,6 +43,8 @@ const Home = () => {
       attribute: "Endurance",
     },
   ];
+  const { xp } = useXp();
+
   return (
     <ThemedView style={styles.container} safe={true}>
       <ThemedText
@@ -80,7 +83,7 @@ const Home = () => {
       </View>
 
       <Spacer height={10} />
-      <XpBar current={120} max={200} />
+      <XpBar current={xp} max={1000} />
 
       <View style={styles.rowContainer}>
         {stats.map((stat) => (
@@ -110,7 +113,7 @@ const Home = () => {
           key={quest.title}
           TitleText={quest.title}
           SubText={quest.description}
-          XpText={quest.xp}
+          XpAmount={quest.xp}
         />
       ))}
     </ThemedView>
