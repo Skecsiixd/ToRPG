@@ -83,7 +83,7 @@ const Home = () => {
       </View>
 
       <Spacer height={10} />
-      <XpBar current={xp} max={2000} />
+      <XpBar current={xp} max={1000} />
 
       <View style={styles.rowContainer}>
         {stats.map((stat) => (
