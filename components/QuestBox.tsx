@@ -11,21 +11,23 @@ import {
 import { Colors } from "../constants/Colors";
 import { withOpacity } from "./AddOpacity";
 import ThemedText from "./ThemedText";
+import { useXp } from "../context/XpContext";
 
 interface QuestBoxProps {
   TitleText: string;
   SubText: string;
-  XpText: number;
+  XpAmount: number;
 }
 
 const QuestBox = ({
   TitleText,
   SubText,
-  XpText,
+  XpAmount,
   ...props
 }: QuestBoxProps & ViewProps) => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? "light"];
+  const { addXp } = useXp();
   const [completed, setCompleted] = useState(false);
 
   return (
@@ -44,7 +46,12 @@ const QuestBox = ({
       ]}
     >
       <View style={styles.rowContainer}>
-        <Pressable onPress={() => setCompleted((prev) => !prev)}>
+        <Pressable
+          onPress={() => {
+            completed ? addXp(-XpAmount) : addXp(XpAmount); // Csak akkor adjon XP-t, ha még nem volt teljesítve
+            setCompleted((prev) => !prev);
+          }}
+        >
           <MaterialCommunityIcons
             name={
               completed
@@ -83,7 +90,7 @@ const QuestBox = ({
           ]}
         >
           <Text style={{ color: Colors.purple[200], fontWeight: "bold" }}>
-            +{XpText.toString()} XP
+            +{XpAmount} XP
           </Text>
         </View>
       </View>
