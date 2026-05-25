@@ -3,12 +3,12 @@ import { Tabs } from "expo-router";
 import React from "react";
 import { useColorScheme } from "react-native";
 import { Colors } from "../constants/Colors";
-import { XpProvider } from "../context/XpContext";
-const RootLayout = () => {
+import { AppProvider } from "../context/AppContext";
+const TabsLayout = () => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? "light"];
   return (
-    <XpProvider>
+    <AppProvider>
       <Tabs
         screenOptions={{
           headerShown: false,
@@ -54,11 +54,12 @@ const RootLayout = () => {
             ),
           }}
         />
+        <Tabs.Screen name="(subpages)" options={{ href: null }}></Tabs.Screen>
       </Tabs>
-    </XpProvider>
+    </AppProvider>
   );
 };
 
-export default RootLayout;
+export default TabsLayout;
 
 //const styles = StyleSheet.create({});

@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { withOpacity } from "../components/AddOpacity";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { withOpacity } from "../lib/utils";
 import PowerBox from "../components/PowerBox";
 import QuestBox from "../components/QuestBox";
 import Spacer from "../components/Spacer";
@@ -10,14 +10,9 @@ import ThemedText from "../components/ThemedText";
 import ThemedView from "../components/ThemedView";
 import XpBar from "../components/XpBar";
 import { Colors } from "../constants/Colors";
-import { useXp } from "../context/XpContext";
+import { useAppContext } from "../context/AppContext";
 
 const Home = () => {
-  const quests = [
-    { title: "Gooning", description: "verd ki xdddd", xp: 140 },
-    { title: "2L Cola", description: "yummy", xp: 50 },
-    { title: "5x30 workout", description: "nagy izmok", xp: 200 },
-  ];
   const stats: {
     icon: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
     iconColor: string;
@@ -43,7 +38,7 @@ const Home = () => {
       attribute: "Endurance",
     },
   ];
-  const { xp } = useXp();
+  const { xp, quests } = useAppContext();
 
   return (
     <ThemedView style={styles.container} safe={true}>
@@ -108,14 +103,16 @@ const Home = () => {
       <ThemedText style={{ alignSelf: "flex-start", paddingHorizontal: 15 }}>
         TODAY'S QUESTS
       </ThemedText>
-      {quests.map((quest) => (
-        <QuestBox
-          key={quest.title}
-          TitleText={quest.title}
-          SubText={quest.description}
-          XpAmount={quest.xp}
-        />
-      ))}
+      <ScrollView style={{ width: "100%" }}>
+        {quests.map((quest) => (
+          <QuestBox
+            key={quest.title}
+            TitleText={quest.title}
+            SubText={quest.description}
+            XpAmount={quest.xpReward}
+          />
+        ))}
+      </ScrollView>
     </ThemedView>
   );
 };
