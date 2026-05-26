@@ -1,7 +1,5 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React from "react";
 import {
-  Pressable,
   StyleSheet,
   Text,
   useColorScheme,
@@ -11,8 +9,6 @@ import {
 import { Colors } from "../constants/Colors";
 import { withOpacity } from "../lib/utils";
 import ThemedText from "./ThemedText";
-import { useAppContext } from "../context/AppContext";
-import * as Haptics from "expo-haptics";
 
 interface ExtendedQuestBoxProps {
   TitleText: string;

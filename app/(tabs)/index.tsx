@@ -1,16 +1,16 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { withOpacity } from "../lib/utils";
-import PowerBox from "../components/PowerBox";
-import QuestBox from "../components/QuestBox";
-import Spacer from "../components/Spacer";
-import StreakBox from "../components/StreakBox";
-import ThemedText from "../components/ThemedText";
-import ThemedView from "../components/ThemedView";
-import XpBar from "../components/XpBar";
-import { Colors } from "../constants/Colors";
-import { useAppContext } from "../context/AppContext";
+import { withOpacity } from "../../lib/utils";
+import PowerBox from "../../components/PowerBox";
+import QuestBox from "../../components/QuestBox";
+import Spacer from "../../components/Spacer";
+import StreakBox from "../../components/StreakBox";
+import ThemedText from "../../components/ThemedText";
+import ThemedView from "../../components/ThemedView";
+import XpBar from "../../components/XpBar";
+import { Colors } from "../../constants/Colors";
+import { useAppContext } from "../../context/AppContext";
 
 const Home = () => {
   const stats: {

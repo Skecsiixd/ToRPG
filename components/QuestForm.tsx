@@ -6,10 +6,10 @@ import { withOpacity } from "../lib/utils";
 import { useAppContext } from "../context/AppContext";
 import { useState } from "react";
 import { router } from "expo-router";
-import Spacer from "./Spacer";
-import PowerBox from "./PowerBox";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import DifficulityBox from "./DifficulityBox";
+import ThemedText from "./ThemedText";
+import BackButton from "./BackButton";
 
 const QuestForm = () => {
   const { addQuest } = useAppContext();
@@ -62,7 +62,7 @@ const QuestForm = () => {
 
   const onCreate = () => {
     addQuest({
-      title: text,
+      title: text.trim(),
       description: descriptionText,
       xpReward:
         selectedDifficulity === "easy"
@@ -79,6 +79,14 @@ const QuestForm = () => {
   };
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <BackButton />
+        <ThemedText style={{ fontSize: 20, fontWeight: "bold" }}>
+          New Quest
+        </ThemedText>
+        <View style={{ width: 40 }} />
+        {/* spacer hogy a title középen legyen */}
+      </View>
       <View
         style={[
           styles.textbox,
@@ -89,6 +97,7 @@ const QuestForm = () => {
         ]}
       >
         <TextInput
+          autoFocus={true}
           value={text}
           placeholder="Enter quest name"
           placeholderTextColor="rgba(255, 255, 255, 0.6)"
@@ -101,7 +110,7 @@ const QuestForm = () => {
           }}
         />
       </View>
-      <Spacer height={5} />
+
       <View
         style={[
           styles.textbox,
@@ -141,16 +150,12 @@ const QuestForm = () => {
       </View>
 
       <Pressable
-        onPress={text != "" ? onCreate : errorAlert}
-        style={{
-          marginTop: 20,
-          padding: 15,
-          backgroundColor: "blue",
-          borderRadius: 10,
-          alignSelf: "center",
-        }}
+        onPress={text.trim() !== "" ? onCreate : errorAlert}
+        style={styles.submitBox}
       >
-        <Text>Submit Quest</Text>
+        <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
+          Submit Quest
+        </Text>
       </Pressable>
     </View>
   );
@@ -169,8 +174,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "space-between", // Középre igazítja a dobozokat
     width: "100%",
-    paddingHorizontal: 10, // Megtartja a korábbi oldalsó távolságot
+    //paddingHorizontal: 10, // Megtartja a korábbi oldalsó távolságot
     gap: 5, // Modern React Native-ban ez automatikusan tökéletes távolságot tesz a dobozok közé!
+    marginBottom: 5,
   },
   textbox: {
     height: 70, // Belső távolság bal és jobb oldalt
@@ -181,5 +187,22 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     justifyContent: "center",
     alignItems: "flex-start",
+  },
+  submitBox: {
+    paddingVertical: 16,
+    paddingHorizontal: 40,
+    backgroundColor: withOpacity(Colors.purple[800], 0.5),
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: withOpacity(Colors.purple[800], 0.9),
+    alignSelf: "center",
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: 5,
+    marginBottom: 4,
   },
 });

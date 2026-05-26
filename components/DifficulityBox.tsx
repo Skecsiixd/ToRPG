@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, useColorScheme, Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-// Figyelem: A ThemedText elérési útját a saját projektstruktúrádhoz kell igazítanod!
 import ThemedText from "./ThemedText";
 import { Colors } from "../constants/Colors";
 import { ViewProps } from "react-native";
-import { isWhiteSpaceLike, transform } from "typescript";
 
 interface DifficulityBoxProps {
   icon: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
@@ -28,7 +25,23 @@ const DifficulityBox = ({
 }: DifficulityBoxProps & ViewProps) => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? "light"];
+  const borderColor =
+    focused && text == "easy"
+      ? Colors.difficulty.easy.border
+      : focused && text == "medium"
+        ? Colors.difficulty.medium.border
+        : focused && text == "hard"
+          ? Colors.difficulty.hard.border
+          : theme.border;
 
+  const backgroundColor =
+    focused && text == "easy"
+      ? Colors.difficulty.easy.fill
+      : focused && text == "medium"
+        ? Colors.difficulty.medium.fill
+        : focused && text == "hard"
+          ? Colors.difficulty.hard.fill
+          : theme.uiBackground;
   return (
     <Pressable onPress={() => difficulityHandler(text)}>
       <View
@@ -36,22 +49,8 @@ const DifficulityBox = ({
         style={[
           styles.box,
           {
-            borderColor:
-              focused && text == "easy"
-                ? Colors.difficulty.easy.border
-                : focused && text == "medium"
-                  ? Colors.difficulty.medium.border
-                  : focused && text == "hard"
-                    ? Colors.difficulty.hard.border
-                    : theme.border,
-            backgroundColor:
-              focused && text == "easy"
-                ? Colors.difficulty.easy.fill
-                : focused && text == "medium"
-                  ? Colors.difficulty.medium.fill
-                  : focused && text == "hard"
-                    ? Colors.difficulty.hard.fill
-                    : theme.uiBackground,
+            borderColor: borderColor,
+            backgroundColor: backgroundColor,
             marginHorizontal: 2,
             marginTop: 10,
           },

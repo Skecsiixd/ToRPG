@@ -49,7 +49,7 @@ const QuestBox = ({
       <View style={styles.rowContainer}>
         <Pressable
           onPress={() => {
-            completed ? addXp(-XpAmount) : addXp(XpAmount); // Csak akkor adjon XP-t, ha még nem volt teljesítve
+            addXp(completed ? -XpAmount : XpAmount);
             setCompleted((prev) => !prev);
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
           }}
