@@ -1,7 +1,5 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React from "react";
 import {
-  Pressable,
   StyleSheet,
   Text,
   useColorScheme,
@@ -11,25 +9,21 @@ import {
 import { Colors } from "../constants/Colors";
 import { withOpacity } from "../lib/utils";
 import ThemedText from "./ThemedText";
-import { useAppContext } from "../context/AppContext";
-import * as Haptics from "expo-haptics";
 
-interface QuestBoxProps {
+interface ExtendedQuestBoxProps {
   TitleText: string;
   SubText: string;
   XpAmount: number;
 }
 
-const QuestBox = ({
+const ExtendedQuestBox = ({
   TitleText,
   SubText,
   XpAmount,
   ...props
-}: QuestBoxProps & ViewProps) => {
+}: ExtendedQuestBoxProps & ViewProps) => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? "light"];
-  const { addXp } = useAppContext();
-  const [completed, setCompleted] = useState(false);
 
   return (
     <View
@@ -41,38 +35,18 @@ const QuestBox = ({
           backgroundColor: theme.uiBackground,
           marginHorizontal: 10,
           marginTop: 10,
-          opacity: completed ? 0.5 : 1, // Ha a quest teljesített, akkor legyen áttetszőbb
+          opacity: 1, // Ha a quest teljesített, akkor legyen áttetszőbb
         },
         props.style,
       ]}
     >
       <View style={styles.rowContainer}>
-        <Pressable
-          onPress={() => {
-            addXp(completed ? -XpAmount : XpAmount);
-            setCompleted((prev) => !prev);
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-          }}
-        >
-          <MaterialCommunityIcons
-            name={
-              completed
-                ? "checkbox-marked-circle"
-                : "checkbox-blank-circle-outline"
-            }
-            size={50}
-            color={Colors.purple[300]}
-            style={{ alignSelf: "flex-start" }}
-          />
-        </Pressable>
-
         <View style={{ justifyContent: "center" }}>
           <ThemedText
             title={true}
             style={{
               fontSize: 20,
               fontWeight: "bold",
-              textDecorationLine: completed ? "line-through" : "none", // Ha a quest teljesített, akkor húzza át a szöveget
             }}
           >
             {TitleText}
@@ -102,7 +76,7 @@ const QuestBox = ({
   );
 };
 
-export default QuestBox;
+export default ExtendedQuestBox;
 
 const styles = StyleSheet.create({
   streakbox: {

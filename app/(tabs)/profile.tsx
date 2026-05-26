@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import ThemedView from "../components/ThemedView";
+import ThemedView from "../../components/ThemedView";
 
 const Profile = () => {
   return <ThemedView style={styles.container}></ThemedView>;

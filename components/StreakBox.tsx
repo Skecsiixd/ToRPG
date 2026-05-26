@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
 import { Colors } from "../constants/Colors";
-import { withOpacity } from "./AddOpacity";
+import { withOpacity } from "../lib/utils";
 import ThemedText from "./ThemedText";
 
 interface StreakBoxProps {
