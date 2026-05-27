@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { withOpacity } from "../../lib/utils";
 import PowerBox from "../../components/PowerBox";
@@ -11,6 +11,7 @@ import ThemedView from "../../components/ThemedView";
 import XpBar from "../../components/XpBar";
 import { Colors } from "../../constants/Colors";
 import { useAppContext } from "../../context/AppContext";
+import { supabase } from "../../lib/supabase";
 
 const Home = () => {
   const stats: {
@@ -106,10 +107,10 @@ const Home = () => {
       <ScrollView style={{ width: "100%" }}>
         {quests.map((quest) => (
           <QuestBox
-            key={quest.title}
+            key={quest.id}
             TitleText={quest.title}
             SubText={quest.description}
-            XpAmount={quest.xpReward}
+            XpAmount={quest.xp_reward}
           />
         ))}
       </ScrollView>

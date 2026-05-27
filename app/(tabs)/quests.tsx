@@ -25,7 +25,7 @@ const Quests = () => {
             key={quest.title}
             TitleText={quest.title}
             SubText={quest.description}
-            XpAmount={quest.xpReward}
+            XpAmount={quest.xp_reward}
           />
         ))}
       </ScrollView>
