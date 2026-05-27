@@ -60,11 +60,11 @@ const QuestForm = () => {
       },
     ]);
 
-  const onCreate = () => {
+  const onCreate = async () => {
     addQuest({
       title: text.trim(),
       description: descriptionText,
-      xpReward:
+      xp_reward:
         selectedDifficulity === "easy"
           ? 25
           : selectedDifficulity === "medium"
